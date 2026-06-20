@@ -20,12 +20,18 @@ const FeedbackForm = ({ onGoodClick, onNeutralClick, onBadClick }) => {
 }
 
 const Statistics = ({ good, neutral, bad }) => {
+  const all = () => good + neutral + bad
+  const average = () => all() > 0 ? (good * 1 + neutral * 0 + bad * -1) / all() : 0
+  const positive = () => all() > 0 ? good / all() * 100 : 0
   return (
     <>
       <h2>Statistics</h2>
       <div>good {good}</div>
       <div>neutral {neutral}</div>
       <div>bad {bad}</div>
+      <div>all {all()}</div>
+      <div>average {average()}</div>
+      <div>positive {positive()}%</div>
     </>
   )
 }
