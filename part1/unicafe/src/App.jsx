@@ -8,16 +8,23 @@ const Button = ({ caption, onClick }) => {
   )
 }
 
+const Header2 = ({ text }) => <h2>{text}</h2>
+
 const FeedbackForm = ({ onGoodClick, onNeutralClick, onBadClick }) => {
   return (
-    <>
-      <h1>Give feedback</h1>
-      <Button caption='Good' onClick={onGoodClick} />
-      <Button caption='Neutral' onClick={onNeutralClick} />
-      <Button caption='Bad' onClick={onBadClick} />
-    </>
+    <div>
+      <Header2 text="Give feedback" />
+      <div>
+        <Button caption='Good' onClick={onGoodClick} />
+        <Button caption='Neutral' onClick={onNeutralClick} />
+        <Button caption='Bad' onClick={onBadClick} />
+      </div>
+    </div>
   )
 }
+
+const StatisticsHeader = () => <Header2 text="Statistics" />
+const StatisticLine = ({ text, value }) => <div>{text} {value}</div>
 
 const Statistics = ({ good, neutral, bad }) => {
   const all = good + neutral + bad
@@ -26,23 +33,23 @@ const Statistics = ({ good, neutral, bad }) => {
 
   if (all == 0) {
     return (
-      <>
-        <h2>Statistics</h2>
+      <div>
+        <StatisticsHeader />
         <div>No feedback given</div>
-      </>
+      </div>
     )
   }
 
   return (
-    <>
-      <h2>Statistics</h2>
-      <div>good {good}</div>
-      <div>neutral {neutral}</div>
-      <div>bad {bad}</div>
-      <div>all {all}</div>
-      <div>average {getAverage()}</div>
-      <div>positive {getPositive()}%</div>
-    </>
+    <div>
+      <StatisticsHeader />
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="all" value={all} />
+      <StatisticLine text="average" value={getAverage()} />
+      <StatisticLine text="positive" value={`${getPositive()}%`} />
+    </div>
   )
 }
 
