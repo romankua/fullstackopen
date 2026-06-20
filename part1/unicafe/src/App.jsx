@@ -24,7 +24,7 @@ const FeedbackForm = ({ onGoodClick, onNeutralClick, onBadClick }) => {
 }
 
 const StatisticsHeader = () => <Header2 text="Statistics" />
-const StatisticLine = ({ text, value }) => <div>{text} {value}</div>
+const StatisticLine = ({ text, value }) => <tr><td>{text}</td><td>{value}</td></tr>
 
 const Statistics = ({ good, neutral, bad }) => {
   const all = good + neutral + bad
@@ -43,12 +43,17 @@ const Statistics = ({ good, neutral, bad }) => {
   return (
     <div>
       <StatisticsHeader />
-      <StatisticLine text="good" value={good} />
-      <StatisticLine text="neutral" value={neutral} />
-      <StatisticLine text="bad" value={bad} />
-      <StatisticLine text="all" value={all} />
-      <StatisticLine text="average" value={getAverage()} />
-      <StatisticLine text="positive" value={`${getPositive()}%`} />
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={good} />
+          <StatisticLine text="neutral" value={neutral} />
+          <StatisticLine text="bad" value={bad} />
+          <StatisticLine text="all" value={all} />
+          <StatisticLine text="average" value={getAverage()} />
+          <StatisticLine text="positive" value={`${getPositive()}%`} />
+        </tbody>
+      </table>
+      
     </div>
   )
 }
