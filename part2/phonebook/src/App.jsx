@@ -8,6 +8,11 @@ const App = () => {
   ]) 
   
   const handleAddPerson = (name) => {
+    if (persons.findIndex(p => p.name.toLowerCase() === name.toLowerCase()) !== -1) {
+      alert(`${name} is already added to phonebook`)
+      return
+    }
+
     const person = {
       name
     }
