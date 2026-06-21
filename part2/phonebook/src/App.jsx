@@ -4,19 +4,25 @@ import PersonsList from './components/PersonsList'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    {
+      name: 'Arto Hellas',
+      number: '044-123-45-67'
+    }
   ]) 
   
-  const handleAddPerson = (name) => {
+  const handleAddPerson = ({ name, number }) => {
     if (persons.findIndex(p => p.name.toLowerCase() === name.toLowerCase()) !== -1) {
       alert(`${name} is already added to phonebook`)
-      return
+      return false
     }
 
     const person = {
-      name
+      name,
+      number
     }
     setPersons(persons.concat(person))
+
+    return true
   }
   
 
