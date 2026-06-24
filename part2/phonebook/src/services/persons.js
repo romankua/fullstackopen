@@ -20,8 +20,15 @@ const remove = (id) => {
     .then(response => response.data)
 }
 
+const update = (person) => {
+  return axios
+    .put(`${baseAPIUrl}/${person.id}`, person)
+    .then(response => response.data)
+}
+
 export default {
   getAll,
   add,
-  remove
+  remove,
+  update
 }

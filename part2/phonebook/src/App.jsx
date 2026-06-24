@@ -8,14 +8,31 @@ const App = () => {
   const [persons, setPersons] = useState([])
   const [filter, setFilter] = useState('')
   
+  const handleError = (error) => {
+    console.log("Request failed: ", error.message)
+
+    alert("Error happened, try refreshing browser window and repeat the operation.")
+  }
+
   const loadPersons = () => {
-    personService.getAll()
+    personService
+      .getAll()
       .then(data => setPersons(data))
+      .catch(error => handleError(error))
   }
 
   const addPerson = (person) => {
-    personService.add(person)
+    personService
+      .add(person)
       .then(data => setPersons(persons.concat(data)))
+      .catch(error => handleError(error))
+  }
+
+  const updatePerson = (person) => {
+    personService
+      .update(person)
+      .then(data => setPersons(persons.map(p => p.id === data.id ? data : p)))
+      .catch(error => handleError(error))
   }
 
   const deletePerson = (id) => {
@@ -29,23 +46,36 @@ const App = () => {
       return
     }
 
-    personService.remove(id)
+    personService
+      .remove(id)
       .then(() => setPersons(persons.filter(p => p.id !== id)))
+      .catch(error => handleError(error))
   }
 
   useEffect(loadPersons, [])
   
   const handleAddPerson = ({ name, number }) => {
-    if (persons.findIndex(p => p.name.toLowerCase() === name.toLowerCase()) !== -1) {
-      alert(`${name} is already added to phonebook`)
+    const person = persons.find(p => p.name.toLowerCase() === name.toLowerCase())
+
+    if (person === undefined) {
+      const person = {
+        name,
+        number
+      }
+      addPerson(person)
+
+      return true
+    }
+
+    if (window.confirm(`${name} is already added to phonebook, replace the old number with the new one?`) !== true) {
       return false
     }
 
-    const person = {
-      name,
+    const personUpdate = {
+      ...person,
       number
     }
-    addPerson(person)
+    updatePerson(personUpdate)
 
     return true
   }
