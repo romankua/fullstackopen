@@ -14,7 +14,14 @@ const add = (person) => {
     .then(response => response.data)
 }
 
+const remove = (id) => {
+  return axios
+    .delete(`${baseAPIUrl}/${id}`)
+    .then(response => response.data)
+}
+
 export default {
   getAll,
-  add
+  add,
+  remove
 }

@@ -9,11 +9,28 @@ const App = () => {
   const [filter, setFilter] = useState('')
   
   const loadPersons = () => {
-    personService.getAll().then(data => setPersons(data))
+    personService.getAll()
+      .then(data => setPersons(data))
   }
 
   const addPerson = (person) => {
-    personService.add(person).then(data => setPersons(persons.concat(data)))
+    personService.add(person)
+      .then(data => setPersons(persons.concat(data)))
+  }
+
+  const deletePerson = (id) => {
+    const person = persons.find(p => p.id === id)
+
+    if (person === undefined) {
+      return
+    }
+    
+    if (window.confirm(`Delete ${person.name}?`) !== true) {
+      return
+    }
+
+    personService.remove(id)
+      .then(() => setPersons(persons.filter(p => p.id !== id)))
   }
 
   useEffect(loadPersons, [])
@@ -39,7 +56,9 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter value={filter} onChange={setFilter}/>
       <NewPersonForm addPerson={handleAddPerson} />
-      <PersonsList persons={persons.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))} />
+      <PersonsList 
+        persons={persons.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))}
+        onDelete={deletePerson} />
     </div>
   )
 }
