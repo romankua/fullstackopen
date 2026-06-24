@@ -7,11 +7,18 @@ import Filter from './components/Filter'
 const App = () => {
   const [persons, setPersons] = useState([])
   const [filter, setFilter] = useState('')
-
+  const baseAPIUrl = "http://localhost:3001/persons"
   const loadPersons = () => {
     axios
-      .get("http://localhost:3001/persons")
+      .get(baseAPIUrl)
       .then(response => setPersons(response.data))
+  }
+
+  const addPerson = (person) => {
+    axios
+      .post(baseAPIUrl, person)
+      .then(response => response.data)
+      .then(data => setPersons(persons.concat(data)))
   }
 
   useEffect(loadPersons, [])
@@ -26,7 +33,7 @@ const App = () => {
       name,
       number
     }
-    setPersons(persons.concat(person))
+    addPerson(person)
 
     return true
   }
