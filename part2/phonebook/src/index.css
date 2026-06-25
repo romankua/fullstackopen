@@ -1,0 +1,103 @@
+body {
+  color: #333;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+.col-1 {
+  width: calc(100%/12);
+}
+
+.col-2 {
+  width: calc(200%/12);
+}
+
+.col-3 {
+  width: calc(300%/12);
+}
+
+.col-4 {
+  width: calc(400%/12);
+}
+
+.col-5 {
+  width: calc(500%/12);
+}
+
+.col-6 {
+  width: calc(600%/12);
+}
+
+.col-7 {
+  width: calc(700%/12);
+}
+
+.col-8 {
+  width: calc(800%/12);
+}
+
+.col-9 {
+  width: calc(900%/12);
+}
+
+.col-10 {
+  width: calc(1000%/12);
+}
+
+.col-11 {
+  width: calc(1100%/12);
+}
+
+.col-12 {
+  width: calc(1200%/12);
+}
+
+.container {
+  margin: 2rem auto;
+}
+
+.app-title {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.controls-container .controls-row {
+  margin: 0.5rem 0;
+}
+
+.controls-container .controls-row label,
+.controls-container .controls-row input,
+.controls-container .controls-row button {
+  display: block;
+  width: 100%;
+}
+
+.controls-container .controls-row label + input {
+  margin: 0.5rem 0;
+}
+
+.controls-container .controls-row button {
+  margin: 1rem 0;
+}
+
+.controls-container .controls-row input,
+.controls-container .controls-row button {
+  padding: 0.5em;
+}
+
+ul.display-table {
+  display: table;
+  padding: 0;
+}
+
+ul.display-table > li {
+  display: table-row;
+  list-style: none;
+}
+
+ul.display-table > li > * {
+  display: table-cell;
+  padding: 0.25em;
+}

@@ -13,17 +13,21 @@ const NewPersonForm = ({ addPerson }) => {
   }
 
   return (
-    <div>
+    <div className='container'>
       <h2>Add a new person</h2>
       <form onSubmit={handleAddName}>
-        <div>
-          name: <input value={newName} onChange={e => setNewName(e.target.value)} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={e => setNewNumber(e.target.value)} />
-        </div>
-        <div>
-          <button type="submit">add</button>
+        <div className="controls-container">
+          <div className='controls-row'>
+            <label htmlFor='new-name'>Name:</label>
+            <input id='new-name' value={newName} onChange={e => setNewName(e.target.value)} />
+          </div>
+          <div className='controls-row'>
+            <label htmlFor='new-number'>Number:</label>
+            <input id='new-number' value={newNumber} onChange={e => setNewNumber(e.target.value)} />
+          </div>
+          <div className='controls-row'>
+            <button type="submit">Add</button>
+          </div>
         </div>
       </form>
     </div>

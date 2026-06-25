@@ -1,9 +1,12 @@
 const DisplayOptions = ({ value, onChange }) => {
   return (
-    <div>
+    <div className='container'>
       <h2>Display Options</h2>
-      <div>
-        filter shown with <input value={value} onChange={e => onChange(e.target.value)} />
+      <div className="controls-container">
+        <div className='controls-row'>
+          <label htmlFor="person-filter">Filter:</label>
+          <input id="person-filter" value={value} onChange={e => onChange(e.target.value)} />
+        </div>
       </div>
     </div>
   )

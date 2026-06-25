@@ -3,6 +3,7 @@ import personService from './services/persons'
 import NewPersonForm from './components/NewPersonForm'
 import PersonsList from './components/PersonsList'
 import DisplayOptions from './components/DisplayOptions'
+import './index.css'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -82,9 +83,8 @@ const App = () => {
   
 
   return (
-    <div>
-      <h2>Phonebook</h2>
-      <Filter value={filter} onChange={setFilter}/>
+    <div className='container col-6'>
+      <h1 className='app-title'>Phonebook</h1>
       <NewPersonForm addPerson={handleAddPerson} />
       <DisplayOptions value={filter} onChange={setFilter}/>
       <PersonsList 
