@@ -12,9 +12,16 @@ const App = () => {
   // {message: "Some text", category: "info|success|error"}
   const [notification, setNotification] = useState({})
   
-  const handleError = (error) => {
+  const handleError = ({ error, person }) => {
     console.log("Error: ", error.message)
 
+    if (error.response && error.response.status === 404 && person) {
+      error = {
+        ...error,
+        message: `Information of ${person.name} has already been removed from server`
+      }
+    }
+    
     setNotification({message: `Error: ${error.message}. Refresh the page and try again.`, category: "error"})
   }
 
@@ -32,7 +39,7 @@ const App = () => {
         setPersons(data)
         notifySuccess("Data loaded")
       })
-      .catch(error => handleError(error))
+      .catch(error => handleError({ error }))
   }
 
   const addPerson = (person) => {
@@ -42,7 +49,7 @@ const App = () => {
         setPersons(persons.concat(data))
         notifySuccess(`Added ${person.name}`)
       })
-      .catch(error => handleError(error))
+      .catch(error => handleError({ error }))
   }
 
   const updatePerson = (person) => {
@@ -52,7 +59,7 @@ const App = () => {
         setPersons(persons.map(p => p.id === data.id ? data : p))
         notifySuccess(`Updated ${person.name}`)
       })
-      .catch(error => handleError(error))
+      .catch(error => handleError({ error, person }))
   }
 
   const deletePerson = (id) => {
@@ -72,7 +79,9 @@ const App = () => {
         setPersons(persons.filter(p => p.id !== id))
         notifySuccess(`Removed ${person.name}`)
       })
-      .catch(error => handleError(error))
+      .catch(error => {
+        handleError({ error, person })
+      })
   }
 
   useEffect(loadPersons, [])
