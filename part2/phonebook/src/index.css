@@ -101,3 +101,26 @@ ul.display-table > li > * {
   display: table-cell;
   padding: 0.25em;
 }
+
+.notification {
+  border: 3px solid;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  padding: 1em;
+  text-align: center;
+}
+
+.notification-success {
+  color: green;
+  background-color: lightgreen;
+}
+
+.notification-info {
+  color: darkslategrey;
+  background-color: lightgrey;
+}
+
+.notification-error {
+  color: red;
+  background-color: lightpink;
+}
