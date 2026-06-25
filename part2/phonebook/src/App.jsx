@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import personService from './services/persons'
 import NewPersonForm from './components/NewPersonForm'
 import PersonsList from './components/PersonsList'
-import Filter from './components/Filter'
+import DisplayOptions from './components/DisplayOptions'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -86,6 +86,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter value={filter} onChange={setFilter}/>
       <NewPersonForm addPerson={handleAddPerson} />
+      <DisplayOptions value={filter} onChange={setFilter}/>
       <PersonsList 
         persons={persons.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))}
         onDelete={deletePerson} />
