@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react'
 import countriesService from './services/countries'
 import Filter from './components/Filter'
 import CountryList from './components/CountryList'
+import CountryDetails from './components/CountryDetails'
 
 function App() {
   const [countryFilter, setCountryFilter] = useState('')
   const [countryList, setCountryList] = useState([])
+  const [selectedCountry, setSelectedCountry] = useState(null)
 
   const loadCountryList = () => {
     countriesService
@@ -14,14 +16,20 @@ function App() {
       .catch(e => console.log("Error: ", e))
   }
 
+  const handleCountryFilterChange = (e) => {
+    setSelectedCountry(null)
+    setCountryFilter(e.target.value.toLowerCase())
+  }
+
   useEffect(loadCountryList, [])
 
   console.log('App rendering...')
 
   return (
     <div>
-      <Filter value={countryFilter} onChange={e => setCountryFilter(e.target.value.toLowerCase())} />
-      <CountryList countries={countryList} filter={countryFilter} />
+      <Filter value={countryFilter} onChange={handleCountryFilterChange} />
+      <CountryList countries={countryList} filter={countryFilter} onShowDetails={setSelectedCountry}/>
+      <CountryDetails country={selectedCountry}/>
     </div>
   )
 }

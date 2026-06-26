@@ -1,6 +1,4 @@
-import CountryDetails from "./CountryDetails"
-
-const CountryList = ({ countries, filter }) => {
+const CountryList = ({ countries, filter, onShowDetails }) => {
   if (!countries) {
     return null
   }
@@ -16,8 +14,8 @@ const CountryList = ({ countries, filter }) => {
   const filtered = countries.filter(c => c.name && c.name.common && c.name.common.toLowerCase().includes(filter))
 
   if (filtered.length === 1) {
-    const country = filtered[0]
-    return <CountryDetails country={country} />
+    onShowDetails(filtered[0])
+    return null
   }
 
   if (filtered.length > 10) {
@@ -31,7 +29,7 @@ const CountryList = ({ countries, filter }) => {
   return (
     <div>
       <ul>
-        {filtered.map(c => <li key={c.cca3}>{c.name.common}</li>)}
+        {filtered.map(c => <li key={c.cca3}>{c.name.common} <button onClick={() => onShowDetails(c)}>Show</button></li>)}
       </ul>
     </div>
   )
