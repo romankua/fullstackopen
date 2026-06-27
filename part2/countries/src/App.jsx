@@ -29,7 +29,7 @@ function App() {
     <div>
       <Filter value={countryFilter} onChange={handleCountryFilterChange} />
       <CountryList countries={countryList} filter={countryFilter} onShowDetails={setSelectedCountry}/>
-      <CountryDetails country={selectedCountry}/>
+      {selectedCountry ? <CountryDetails country={selectedCountry}/> : null}
     </div>
   )
 }
