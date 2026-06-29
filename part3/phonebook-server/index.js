@@ -50,8 +50,10 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 app.post('/api/persons', (request, response) => {
-  // console.log(request)
-  const person = request.body
+  const person = {
+    name: request.body.name,
+    number: request.body.number
+  }
   
   if (!person.name) {
     return response.status(400).send({ error: 'name is required' })
