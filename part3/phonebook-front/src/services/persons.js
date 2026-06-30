@@ -26,8 +26,6 @@ const add = (person) => {
 const remove = (id) => {
   return axios
     .delete(`${baseAPIUrl}/${id}`)
-    .then(checkResponseIsJson)
-    .then(response => response.data)
 }
 
 const update = (person) => {
