@@ -9,10 +9,10 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:client": "rm -rf client && cd ../phonebook-front && npm run build && cp -r dist ../phonebook-server/client"
   },
   "dependencies": {
-    "cors": "^2.8.6",
     "express": "^5.2.1",
     "morgan": "^1.11.0"
   }
